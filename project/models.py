@@ -1,6 +1,3 @@
-from tabnanny import verbose
-from tkinter import CASCADE
-from unicodedata import category
 from django.db import models
 
 class Project(models.Model):
@@ -25,7 +22,7 @@ class Project(models.Model):
 class Recruit(models.Model):
     project = models.OneToOneField(
         Project,
-        on_delete=CASCADE,
+        on_delete=models.CASCADE,
         primary_key=True,
     )
     title = models.CharField(max_length=50, verbose_name='모집 타이틀')
