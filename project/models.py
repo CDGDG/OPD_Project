@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 
 class Project(models.Model):
@@ -52,10 +53,19 @@ class Document(models.Model):
 
     def __str__(self):
         return self.project.title + '의 문서'
+
+class Language(models.Model):
+    language = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = 'opd_language'
+        verbose_name = '언어'
+        verbose_name_plural = '언어(들)'
+
+    def __str__(self):
+        return self.language
+        
+    
     
 
 
-
-
-
-        
