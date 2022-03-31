@@ -1,5 +1,4 @@
 from django.db import models
-from developer.models import Developer
 
 class Language(models.Model):
     language = models.CharField(max_length=30)
@@ -23,8 +22,8 @@ class Project(models.Model):
     thumbnail = models.FileField(upload_to='project_thumbnail/')
     thumbnail_original = models.TextField(null=False)
 
-    member = models.ManyToManyField(Developer)
-    language = models.ManyToManyField(Language)
+    member = models.ManyToManyField('developer.Developer')
+    language = models.ManyToManyField('project.Language')
 
     class Meta:
         db_table = 'opd_project'
@@ -36,10 +35,11 @@ class Project(models.Model):
 
 class Recruit(models.Model):
     project = models.OneToOneField(
-        Project,
+        'project.Project',
         on_delete=models.CASCADE,
         primary_key=True,
     )
+
     title = models.CharField(max_length=50, verbose_name='모집 타이틀')
     contents = models.TextField(verbose_name='모집 내용')
     regdate = models.DateTimeField(auto_now_add=True, verbose_name='모집 등록일')
@@ -55,8 +55,8 @@ class Recruit(models.Model):
         return self.title
     
 class RecruitOk(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
+    project = models.ForeignKey('project.Project', on_delete=models.CASCADE)
+    developer = models.ForeignKey('developer.Developer', on_delete=models.CASCADE)
     contents = models.TextField()
 
     class Meta:
@@ -68,12 +68,12 @@ class RecruitOk(models.Model):
         return self.developer.userid + "|" + self.project.title
     
 class Recruit_Language(models.Model):
-    recruit = models.ForeignKey(Recruit, on_delete=models.CASCADE)
-    language = models.ForeignKey(Language, on_delete=models.CASCADE)
+    recruit = models.ForeignKey('recruit.Recruit', on_delete=models.CASCADE)
+    language = models.ForeignKey('project.Language', on_delete=models.CASCADE)
     people = models.IntegerField()
 
 class Document(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='프로젝트')
+    project = models.ForeignKey('project.Project', on_delete=models.CASCADE, verbose_name='프로젝트')
     category = models.CharField(max_length=20, verbose_name='문서 카테고리')
     docfile = models.FileField(upload_to='document_docfile/')
     docfile_original = models.TextField(null=False)

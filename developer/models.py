@@ -1,6 +1,5 @@
 from django.db import models
-from project.models import Language
-from project.models import Project
+from project.models import Project, Language
 
 class Developer(models.Model):
     userid = models.CharField(max_length=20, verbose_name ='개발자 아이디')
