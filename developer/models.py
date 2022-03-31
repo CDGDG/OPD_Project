@@ -1,5 +1,4 @@
 from django.db import models
-from project.models import Project, Language
 
 class Developer(models.Model):
     userid = models.CharField(max_length=20, verbose_name ='개발자 아이디')
@@ -14,8 +13,8 @@ class Developer(models.Model):
     resume = models.FileField(upload_to = 'developer_resume/')
     resume_original = models.TextField(null=False)
 
-    language = models.ManyToManyField(Language)
-    likeproject = models.ManyToManyField(Project)
+    language = models.ManyToManyField('project.Language')
+    likeproject = models.ManyToManyField('project.Project')
 
     class Meta:
         db_table = 'opd_developer'
@@ -27,8 +26,8 @@ class Developer(models.Model):
         return self.userid
 
 class Follow(models.Model):
-    developer = models.ForeignKey(Developer, on_delete=models.CASCADE,related_name='%(class)s_follow_developer')
-    follower = models.ForeignKey(Developer,on_delete=models.CASCADE,related_name='%(class)s_follow_follower')
+    developer = models.ForeignKey('developer.Developer', on_delete=models.CASCADE,related_name='%(class)s_follow_developer')
+    follower = models.ForeignKey('developer.Developer',on_delete=models.CASCADE,related_name='%(class)s_follow_follower')
 
     class Meta:
         db_table='opd_follow'
