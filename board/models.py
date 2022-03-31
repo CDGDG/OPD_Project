@@ -20,7 +20,7 @@ class Board(models.Model):
 
 class Boardimg(models.Model):
     board = models.ForeignKey('board.Board', on_delete=models.CASCADE, verbose_name='게시판')
-    img = models.FileField(upload_to='boardimg_img')
+    img = models.FileField(upload_to='boardimg_img/', default="")
     img_original = models.CharField(max_length=200, null=False)
 
     class Meta:
