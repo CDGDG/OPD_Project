@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="">
+        {% for field in form %}   {#  form 의 각 필드 별로 for 순환 #}
+        {#  field 변수 안에는 필요한 정보들이 있다. #}
+        <div class="form-group mt-3">
+            {% if field.name == 'language' %}
+            <label>{{field.label}}</label>
+            <ul class='form-control' style='list-style-type: none;'>
+                {% for f in field %}
+                <li>{{f}}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            {% if field.name ==  'contents' %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>  {# id_for_label  <- id 정보가 담겨 있다 #}
+            <textarea class="form-control" name="{{field.name}}" placeholder="{{field.label}}"></textarea>
+            {% else %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>  {# id_for_label  <- id 정보가 담겨 있다 #}
+            <input type="{{ field.field.widget.input_type }}" class="{%if field.name not in 'private'%}form-control{%endif%}" id="{{ field.id_for_label }}"
+            placeholder="{{ field.label }}" name="{{ field.name }}"/>
+            {% endif %}
+            {% endif %}
+        </div>
+        {% if field.errors %}
+        <span class="text-danger">{{ field.errors }}</span>
+        {% endif %}
+        {% endfor %}
+    </form>
+
+{% endblock  %}
