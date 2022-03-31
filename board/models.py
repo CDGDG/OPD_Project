@@ -1,10 +1,10 @@
-from xmlrpc.client import Boolean
+from tabnanny import verbose
 from django.db import models
-from developer.models import Developer
+# from developer.models import Developer
 
 
 class Board(models.Model):
-    developer = models.ForeignKey(Developer, on_delete=models.CASCADE, verbose_name='개발자')
+    developer = models.ForeignKey('developer.Developer', on_delete=models.CASCADE, verbose_name='개발자')
     language = models.IntegerField(default=0, verbose_name='언어')
     title = models.CharField(max_length=20, verbose_name='제목')
     contents = models.TextField(verbose_name='내용')
@@ -20,7 +20,7 @@ class Board(models.Model):
         return f'id{self.id}:{self.title}|{self.developer}'
 
 class Boardimg(models.Model):
-    board = models.ForeignKey(Board, on_delete=models.CASCADE, verbose_name='게시판')
+    board = models.ForeignKey('board.Board', on_delete=models.CASCADE, verbose_name='게시판')
     boardimg = models.TextField(verbose_name='게시판그림')
     img_original = models.CharField(max_length=200, null=False)
 
@@ -31,11 +31,27 @@ class Boardimg(models.Model):
 
     
 class Comment(models.Model):
-    board = models.ForeignKey(Board, on_delete=models.CASCADE, verbose_name='게시판')
-    developer = models.ForeignKey(Developer, on_delete=models.CASCADE, verbose_name='작성자')
+    board = models.ForeignKey('board.Board', on_delete=models.CASCADE, verbose_name='게시판')
+    developer = models.ForeignKey('developer.Developer', on_delete=models.CASCADE, verbose_name='작성자')
     contents = models.CharField(max_length=100, verbose_name='댓글내용')
     regdate = models.DateField(auto_now_add=True, verbose_name='등록시간')
     private = models.BooleanField(default=False)
+
+    class Meta:
+        db_table = 'opd_comment'
+        verbose_name = '댓글'
+        verbose_name_plural = '댓글(들)'
+
+class Language(models.Model):
+    language = models.CharField(max_length=30, verbose_name='언어')
+
+    class Meta:
+        db_tabel = 'opd_language'
+        verbose_name = '언어'
+        verbose_name_plural = '언어(들)'
+
+
+
     
 
 
