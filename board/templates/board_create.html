@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block contents %}
+
+<div>
+    <form action="" method="post">
+        <p>제목</p>
+        <input type="text" id="title" name="title" class="form-control"><br>
+        <p>작성자</p>
+        <input type="text" id="writer" name="writer" class="form-control"><br>
+        <p>내용</p>
+        <textarea type="text" id="content" name="content" class="form-control"></textarea>
+        <p>파일</p>
+        <
+        <br>
+
+        <div class="form-row float-right">
+        <button type="submit" class="btn btn-primary">목록</button>
+        <button type="submit" class="btn btn-primary">작성</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
