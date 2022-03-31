@@ -1,5 +1,3 @@
-from sys import _version_info
-from tabnanny import verbose
 from django.db import models
 
 class Developer(models.Model):
@@ -11,9 +9,9 @@ class Developer(models.Model):
     email = models.TextField()
     regdate = models.DateTimeField(auto_now_add=True,verbose_name='등록일')
     pic = models.FileField(upload_to='developer_pic/')
-    pic_original = models.CharField(null=False)
+    pic_original = models.TextField(null=False)
     resume = models.FileField(upload_to = 'developer_resume/')
-    resume_original = models.CharField(null=False)
+    resume_original = models.TextField(null=False)
     
 
     class Meta:
@@ -26,8 +24,8 @@ class Developer(models.Model):
         return self.userid
 
 class Follow(models.Model):
-    developer = models.ForeignKey(Developer, on_delete=models.CASCADE,primary_key=True)
-    follower = models.ForeignKey(Developer,on_delete=models.CASCADE,primary_key=True)
+    developer = models.ForeignKey(Developer, on_delete=models.CASCADE,related_name='%(class)s_follow_developer')
+    follower = models.ForeignKey(Developer,on_delete=models.CASCADE,related_name='%(class)s_follow_follower')
 
     class Meta:
         db_table='opd_follow'
