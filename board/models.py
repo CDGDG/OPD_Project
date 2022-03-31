@@ -1,5 +1,5 @@
+from xmlrpc.client import Boolean
 from django.db import models
-
 from developer.models import Developer
 
 
@@ -16,6 +16,9 @@ class Board(models.Model):
         verbose_name = '게시판'
         verbose_name_plural = '게시판(들)'
 
+    def __str__(self):
+        return f'id{self.id}:{self.title}|{self.developer}'
+
 class Boardimg(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE, verbose_name='게시판')
     boardimg = models.TextField(verbose_name='게시판그림')
@@ -25,5 +28,17 @@ class Boardimg(models.Model):
         db_table = 'opd_boardimg'
         verbose_name = '게시판그림'
         verbose_name_plural = '게시판그림(들)'
+
+    
+class Comment(models.Model):
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, verbose_name='게시판')
+    developer = models.ForeignKey(Developer, on_delete=models.CASCADE, verbose_name='작성자')
+    contents = models.CharField(max_length=100, verbose_name='댓글내용')
+    regdate = models.DateField(auto_now_add=True, verbose_name='등록시간')
+    private = models.BooleanField(default=False)
+    
+
+
+
     
 
