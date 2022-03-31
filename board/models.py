@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Board(models.Model):
-    developer = models.ForeignKey('developer.Developer', on_delete=models.CASCADE, verbose_name='개발자')
+    developer = models.ForeignKey('developer.Developer', on_delete=models.CASCADE, verbose_name='작성자')
     language = models.ForeignKey('project.Language', on_delete=models.CASCADE, verbose_name='언어')
     title = models.CharField(max_length=20, verbose_name='제목')
     contents = models.TextField(verbose_name='내용')
