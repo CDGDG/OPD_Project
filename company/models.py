@@ -1,11 +1,25 @@
+from unicodedata import category
 from django.db import models
 
 class Company(models.Model):
-    companyid = models.CharField(max_length=20)
-    password = models.CharField(max_length=50)
-    name = models.CharField(max_length=15)
-    pic = models.FileField(default=0)
-    s_gender = models.CharField(max_length=30)
+    companyid = models.CharField(max_length=20, verbose_name='회사아이디')
+    password = models.CharField(max_length=50, verbose_name='회사비밀번호')
+    name = models.CharField(max_length=15, verbose_name='회사이름')
+    pic = models.FileField(upload_to="company_pic/", verbose_name='회사프로필사진')
+    pic_original = models.CharField(max_length=200, null=False, verbose_name='회사프로필사진이름')
+    tel = models.CharField(max_length=11, verbose_name='회사전화번호')
+    email = models.EmailField(max_length=128, verbose_name='회사이메일')
+    address = models.CharField(max_length=30, verbose_name='회사주소')
+    summary = models.TextField(verbose_name='회사설명')
+    regdate = models.DateTimeField(auto_now_add=True, verbose_name='가입시간')
+    url = models.TextField(verbose_name='회사홈페이지URL')
+    people = models.PositiveIntegerField(verbose_name='직원수')
+    category = models.CharField(max_length=10, verbose_name='분류')
+
+    class Meta:
+        db_table = 'opd_company'
+        verbose_name = '회사'  # 모델 이름 (admin)
+        verbose_name_plural = '회사(들)'  # 모델 복수형 이름 (admin)
 
     def __str__(self):
-        return f'id{self.id}:{self.s_name}|{self.s_age}|{self.s_grade}|{self.s_gender}'
+        return f'id{self.name}-{self.category}'
