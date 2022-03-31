@@ -1,5 +1,6 @@
-from tabnanny import verbose
 from django.db import models
+from developer.models import Developer
+
 
 class Project(models.Model):
     title = models.CharField(max_length=50, verbose_name='프로젝트 타이틀')
@@ -11,6 +12,8 @@ class Project(models.Model):
     private = models.BooleanField(default=False)
     thumbnail = models.FileField(upload_to='project_thumbnail/')
     thumbnail_original = models.TextField(null=False)
+
+    member = models.ManyToManyField(Developer)
 
     class Meta:
         db_table = 'opd_project'
@@ -40,6 +43,20 @@ class Recruit(models.Model):
     def __str__(self):
         return self.title
     
+class RecruitOk(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
+    contents = models.TextField()
+
+    class Meta:
+        db_table = 'opd_recruitok'
+        verbose_name = '프로젝트 모집처리'
+        verbose_name_plural = '프로젝트 모집(들)'
+
+    def __str__(self):
+        return self.developer.userid + "|" + self.project.title
+    
+
 class Document(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='프로젝트')
     category = models.CharField(max_length=20, verbose_name='문서 카테고리')
