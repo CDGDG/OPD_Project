@@ -7,13 +7,13 @@ def join(request):
         form = JoinForm(request.POST)
     else:
         form = JoinForm()
-    return render(request,'join.html',{'form':form})
+    return render(request,'developer_join.html',{'form':form})
 
 def info(request):
-    return render(request,'info.html')
+    return render(request,'developer_info.html')
 def update(request):
-    return render(request,'update.html')
+    return render(request,'developer_update.html')
 def myproject(request):
-    return render(request,'myproject.html')
+    return render(request,'developer_myproject.html')
 def follow(request):
-    return render(request,'follow.html')
+    return render(request,'developer_follow.html')
