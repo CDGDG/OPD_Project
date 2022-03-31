@@ -42,14 +42,6 @@ class Comment(models.Model):
         verbose_name = '댓글'
         verbose_name_plural = '댓글(들)'
 
-class Language(models.Model):
-    language = models.CharField(max_length=30, verbose_name='언어')
-
-    class Meta:
-        db_tabel = 'opd_language'
-        verbose_name = '언어'
-        verbose_name_plural = '언어(들)'
-
 
 
     
