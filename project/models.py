@@ -68,7 +68,7 @@ class RecruitOk(models.Model):
         return self.developer.userid + "|" + self.project.title
     
 class Recruit_Language(models.Model):
-    recruit = models.ForeignKey('recruit.Recruit', on_delete=models.CASCADE)
+    recruit = models.ForeignKey('project.Recruit', on_delete=models.CASCADE)
     language = models.ForeignKey('project.Language', on_delete=models.CASCADE)
     people = models.IntegerField()
 

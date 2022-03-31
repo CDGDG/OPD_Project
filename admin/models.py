@@ -34,8 +34,8 @@ class NoticeImg(models.Model):
 
     class Meta:
         db_table = 'opd_noticeimg'
-        vervose_name = '공지사항 이미지'
-        vervose_name_plural = '공지사항 이미지(들)'
+        verbose_name = '공지사항 이미지'
+        verbose_name_plural = '공지사항 이미지(들)'
         
     def __str__(self):
         return self.notice.title + '의 이미지'
