@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'developer',
     'company',
     'admin',
+    'board',
 ]
 
 MIDDLEWARE = [
