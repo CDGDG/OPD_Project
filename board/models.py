@@ -1,4 +1,3 @@
-from tabnanny import verbose
 from django.db import models
 # from developer.models import Developer
 
@@ -36,6 +35,8 @@ class Comment(models.Model):
     contents = models.CharField(max_length=100, verbose_name='댓글내용')
     regdate = models.DateField(auto_now_add=True, verbose_name='등록시간')
     private = models.BooleanField(default=False)
+
+    language = models.ForeignKey('project.Language', on_delete=models.CASCADE, verbose_name='언어')
 
     class Meta:
         db_table = 'opd_comment'
