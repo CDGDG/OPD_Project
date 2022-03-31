@@ -72,6 +72,11 @@ class Recruit_Language(models.Model):
     language = models.ForeignKey('project.Language', on_delete=models.CASCADE)
     people = models.IntegerField()
 
+    class Meta:
+        db_table = 'opd_recruit_language'
+        verbose_name = '프로젝트 모집 언어'
+        verbose_name_plural = '프로젝트 모집 언어(들)'
+
 class Document(models.Model):
     project = models.ForeignKey('project.Project', on_delete=models.CASCADE, verbose_name='프로젝트')
     category = models.CharField(max_length=20, verbose_name='문서 카테고리')
