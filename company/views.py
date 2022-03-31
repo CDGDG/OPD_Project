@@ -17,7 +17,7 @@ def join(request):
     # GET 방식.  회원가입 폼
     if request.method == "GET":
         form = CompanyJoinForm()
-        return render(request, 'join.html', {'form': form})
+        return render(request, 'company_join.html', {'form': form})
     # POST 방식.  회원가입 처리
     # elif request.method == "POST":
     #     username = request.POST['username'] # name='username' 값을 받아온다
