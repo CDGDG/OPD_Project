@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 
 from .models import Project
@@ -15,6 +15,24 @@ def list(request):
     return render(request, 'project_list.html', {"projects": projects})
 
 def create(request):
-    
+    if request.method == "POST":
+        form = Projectform(request.POST, request.FILES)
+        if form.is_valid():
+            project = Project(
+                title = form.title,
+                summary = form.summary,
+                contents = form.contents,
+                startdate = form.startdate,
+                private = form.private,
+                thumbnail = request.FILES['thumbnail'],
+                # language = form.language
+            )
+
+            project.save()
+
+            return redirect('/project/list/')
+        else:
+            print(request.FILES)
+
     form = Projectform()
     return render(request, 'project_create.html', {'form': form})
