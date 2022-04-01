@@ -19,7 +19,7 @@ class Company(models.Model):
 
     likeproject = models.ManyToManyField('project.Project', verbose_name='좋아요한 프로젝트')
 
-    language = models.ManyToManyField('project.Language', verbose_name='사용언어')
+    language = models.ManyToManyField('admin.Language', verbose_name='사용언어')
 
     class Meta:
         db_table = 'opd_company'
