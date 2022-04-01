@@ -14,7 +14,7 @@ class Developer(models.Model):
     resume = models.FileField(upload_to = 'developer_resume/',null=True)
     resume_original = models.TextField(default="")
 
-    language = models.ManyToManyField('project.Language')
+    language = models.ManyToManyField('admin.Language')
     likeproject = models.ManyToManyField('project.Project')
 
     class Meta:

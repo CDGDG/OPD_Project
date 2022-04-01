@@ -2,7 +2,7 @@ from django import forms
 
 import developer
 from .models import Developer
-from project.models import Language
+from admin.models import Language
 from django.contrib.auth.hashers import make_password
 
 class JoinForm(forms.Form):

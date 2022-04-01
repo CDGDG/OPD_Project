@@ -4,7 +4,7 @@ from django.db import models
 
 class Board(models.Model):
     developer = models.ForeignKey('developer.Developer', on_delete=models.CASCADE, verbose_name='작성자')
-    language = models.ForeignKey('project.Language', on_delete=models.CASCADE, verbose_name='언어')
+    language = models.ForeignKey('admin.Language', on_delete=models.CASCADE, verbose_name='언어', null=True)
     title = models.CharField(max_length=20, verbose_name='제목')
     contents = models.TextField(verbose_name='내용')
     regdate = models.DateField(auto_now_add=True, verbose_name='등록시간')
