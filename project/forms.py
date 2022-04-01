@@ -1,6 +1,6 @@
 from functools import reduce
 from django import forms
-# from admin.models import Language
+from admin.models import Language
 from project.models import Project
 
 class Projectform(forms.Form):
@@ -37,9 +37,9 @@ class Projectform(forms.Form):
     thumbnail = forms.ImageField(label='썸네일')
 
     # 언어
-    # LANGUAGE_OPTIONS = reduce(lambda result, lang: result.append((lang.id, lang.language)) or result,Language.objects.all(), [])
+    LANGUAGE_OPTIONS = reduce(lambda result, lang: result.append((lang.id, lang.language)) or result,Language.objects.all(), [])
 
-    # language = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=LANGUAGE_OPTIONS, label='언어 선택')
+    language = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=LANGUAGE_OPTIONS, label='언어 선택')
 
     def clean(self):   
         # 우선 부모 Form 의 clean() 수행 --> 값이 들어있지 않으면 error 처리 
@@ -52,6 +52,6 @@ class Projectform(forms.Form):
         self.contents = cleand_data.get('contents')
         self.startdate = cleand_data.get('startdate')
         self.private = cleand_data.get('private')
-        # self.language = cleand_data.get('language')
+        self.language = cleand_data.get('language')
 
         

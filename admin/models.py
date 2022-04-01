@@ -40,15 +40,15 @@ class NoticeImg(models.Model):
     def __str__(self):
         return self.notice.title + '의 이미지'
     
-# class Language(models.Model):
-#     language = models.CharField(max_length=30)
+class Language(models.Model):
+    language = models.CharField(max_length=30)
 
-#     class Meta:
-#         db_table = 'opd_language'
-#         verbose_name = '언어'
-#         verbose_name_plural = '언어(들)'
+    class Meta:
+        db_table = 'opd_language'
+        verbose_name = '언어'
+        verbose_name_plural = '언어(들)'
 
-#     def __str__(self):
-#         return self.language
+    def __str__(self):
+        return self.language
 
 
