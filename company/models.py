@@ -11,6 +11,7 @@ class Company(models.Model):
     tel = models.CharField(max_length=11, verbose_name='회사전화번호')
     email = models.EmailField(max_length=128, verbose_name='회사이메일')
     address = models.CharField(max_length=30, verbose_name='회사주소')
+    address_detail = models.CharField(max_length=100, verbose_name='회사상세주소')
     summary = models.TextField(verbose_name='회사설명')
     regdate = models.DateTimeField(auto_now_add=True, verbose_name='가입시간')
     url = models.TextField(verbose_name='회사홈페이지URL')
