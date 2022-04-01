@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.http import Http404
+from django.shortcuts import redirect, render
 from .models import Board
 from django.core.paginator import Paginator
 from .forms import Boardform
 from developer.models import Developer
+
 
 def board_list(request):
     boards_all = Board.objects.all().order_by('-id')
@@ -24,10 +26,30 @@ def board_create(request):
             board.contents = form.cleaned_data['contents']
             board.developer = developer
             board.save()
-    
+
+            # tags = form.cleaned_data['tags'].split(",")
+            # for tag in tags:
+
+            #     if not tag: continue
+
+            #     _tag, created = Tag.objects.get_or_create(name=tag)
+
+            #     board.tags.add(_tag)
+
+            return redirect('/board/list/')
+    else:
+        form = Boardform()
+
+    return render(request, 'board_create.html', {'form': form})
+
 
 def board_detail(request, pk):
-    pass
+    try:
+        board = Board.objects.get(pk=pk)
+    except Board.DoesNotExist:
+        raise Http404('게시글을 찾을수 없습니다')
 
+    return render(request, 'board_detail.html', {'board': board})
+    
 def board_update(request, pk):
     pass
