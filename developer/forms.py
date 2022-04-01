@@ -83,6 +83,7 @@ class JoinForm(forms.Form):
         # print(developer)
 
         # developer.save()
+        
     
 
 
