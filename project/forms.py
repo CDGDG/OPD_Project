@@ -1,6 +1,7 @@
 from functools import reduce
 from django import forms
-from project.models import Language, Project
+from admin.models import Language
+from project.models import Project
 
 class Projectform(forms.Form):
     # 제목

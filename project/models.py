@@ -1,16 +1,5 @@
 from django.db import models
 
-class Language(models.Model):
-    language = models.CharField(max_length=30)
-
-    class Meta:
-        db_table = 'opd_language'
-        verbose_name = '언어'
-        verbose_name_plural = '언어(들)'
-
-    def __str__(self):
-        return self.language
-
 class Project(models.Model):
     title = models.CharField(max_length=50, verbose_name='프로젝트 타이틀')
     summary = models.CharField(max_length=100, verbose_name='프로젝트 요약')
@@ -23,7 +12,7 @@ class Project(models.Model):
     thumbnail_original = models.TextField(null=False)
 
     member = models.ManyToManyField('developer.Developer')
-    language = models.ManyToManyField('project.Language')
+    language = models.ManyToManyField('admin.Language')
 
     class Meta:
         db_table = 'opd_project'
@@ -69,7 +58,7 @@ class RecruitOk(models.Model):
     
 class Recruit_Language(models.Model):
     recruit = models.ForeignKey('project.Recruit', on_delete=models.CASCADE)
-    language = models.ForeignKey('project.Language', on_delete=models.CASCADE)
+    language = models.ForeignKey('admin.Language', on_delete=models.CASCADE)
     people = models.IntegerField()
 
     class Meta:
