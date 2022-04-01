@@ -2,7 +2,7 @@
 {% block content %}
 <div class="row mt-5">
     <div class="col-12">
-        <form method="POST" action=".">
+        <form method="POST" action="{% url 'Developer:join' %}",enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in form %}
             <div class="form-group">
@@ -25,7 +25,6 @@
             {% endfor %}
             <div class="mt-3">
                 <button type="submit" class="btn btn-primary mt-3">회원가입</button>
-                {% comment %} <a class="btn btn-primary mt-3" href="{% url 'Board:list' %}">돌아가기</a> {% endcomment %}
             </div>
         </form>
     </div>
