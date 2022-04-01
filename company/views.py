@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .form import CompanyJoinForm
+from .forms import CompanyJoinForm
 
 def list(request):
     return render(request, 'list.html')
