@@ -10,6 +10,7 @@ class Boardform(forms.Form):
         },
         max_length=20, label='제목'
     )
+
     # 작성자
     developer = forms.CharField(
         error_messages={
@@ -27,5 +28,5 @@ class Boardform(forms.Form):
     )
 
     # 파일
-    
+    img = forms.FileField(label='파일')
 
